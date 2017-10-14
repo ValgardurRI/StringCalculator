@@ -6,13 +6,31 @@ public class StringCalculator
 		{
 			return 0;
 		}
+
 		String modifiedNumbers = numbers.replace('\n', ',');
-		String[] splitNums = modifiedNumbers.split(",");
+		String[] splitNumbers = modifiedNumbers.split(",");
 		int sum = 0;
-		for(int i = 0; i<splitNums.length; i++)
+		String invalidNumbers = "";
+
+		for(int i = 0; i<splitNumbers.length; i++)
 		{
-			sum += Integer.parseInt(splitNums[i]);
+			int currentNumber = Integer.parseInt(splitNumbers[i]);
+			if(currentNumber < 0)
+			{
+				if(!invalidNumbers.isEmpty())
+				{
+					invalidNumbers += ",";
+				}
+				invalidNumbers += currentNumber;
+			}
+			sum += currentNumber;
 		}
+
+		if(!invalidNumbers.isEmpty())
+		{
+			throw new IllegalArgumentException("Negatives not allowed: " + invalidNumbers);
+		}
+
 		return sum;
 	}
 
@@ -30,11 +48,37 @@ public class StringCalculator
 		System.out.println("Generating string s5: \"" + s5 + "\"");	
 		String s6 = "1\n2,3";
 		System.out.println("Generating string s6: \"" + s6 + "\"");
+		String s7 = "-1";
+		System.out.println("Generating string s7: \"" + s7 + "\"");
+		String s8 = "1,-7,-3,2,-1";
+		System.out.println("Generating string s8: \"" + s8 + "\"");
+
 		System.out.println("Testing \"" + s1 + "\" == 0 " + (add(s1) == 0));
 		System.out.println("Testing \"" + s2 + "\" == 1 " + (add(s2) == 1));
 		System.out.println("Testing \"" + s3 + "\" == 17 " + (add(s3) == 17));
-		System.out.println("Testing \"" + s4 + "\"== 40 " + (add(s4) == 40));
-		System.out.println("Testing \"" + s5 + "\"== 10 " + (add(s5) == 10));
+		System.out.println("Testing \"" + s4 + "\" == 40 " + (add(s4) == 40));
+		System.out.println("Testing \"" + s5 + "\" == 10 " + (add(s5) == 10));
 		System.out.println("Testing \"" + s6 + "\" == 6 " + (add(s6) == 6));
+		System.out.println("Testing \"" + s7 + "\"");
+		try
+		{
+			add(s7);
+			System.out.println("An exception should have been cought by now!");
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+
+		System.out.println("Testing \"" + s8 + "\"");
+		try
+		{
+			add(s8);
+			System.out.println("An exception should have been cought by now!");
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
 	}
 }
