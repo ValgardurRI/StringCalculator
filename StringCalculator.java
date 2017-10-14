@@ -15,6 +15,11 @@ public class StringCalculator
 		for(int i = 0; i<splitNumbers.length; i++)
 		{
 			int currentNumber = Integer.parseInt(splitNumbers[i]);
+			if(currentNumber > 1000)
+			{
+				continue;
+			}
+
 			if(currentNumber < 0)
 			{
 				if(!invalidNumbers.isEmpty())
@@ -52,6 +57,10 @@ public class StringCalculator
 		System.out.println("Generating string s7: \"" + s7 + "\"");
 		String s8 = "1,-7,-3,2,-1";
 		System.out.println("Generating string s8: \"" + s8 + "\"");
+		String s9 = "1,9,1001";
+		System.out.println("Generating string s9: \"" + s9 + "\"");
+		String s10 = "1,10,100,1000,2000,9999";
+		System.out.println("Generating string s10: \"" + s10 + "\"");
 
 		System.out.println("Testing \"" + s1 + "\" == 0 " + (add(s1) == 0));
 		System.out.println("Testing \"" + s2 + "\" == 1 " + (add(s2) == 1));
@@ -59,6 +68,7 @@ public class StringCalculator
 		System.out.println("Testing \"" + s4 + "\" == 40 " + (add(s4) == 40));
 		System.out.println("Testing \"" + s5 + "\" == 10 " + (add(s5) == 10));
 		System.out.println("Testing \"" + s6 + "\" == 6 " + (add(s6) == 6));
+		
 		System.out.println("Testing \"" + s7 + "\"");
 		try
 		{
@@ -80,5 +90,8 @@ public class StringCalculator
 		{
 			System.out.println(ex.getMessage());
 		}
+
+		System.out.println("Testing \"" + s9 + "\" == 10 " + (add(s9) == 10));
+		System.out.println("Testing \"" + s10 + "\" == 1111 " + (add(s10) == 1111));
 	}
 }
