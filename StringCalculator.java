@@ -11,9 +11,16 @@ public class StringCalculator
 
 		if(numbers.startsWith("//"))
 		{
-			char delimiter = numbers.charAt(2);
-			modifiedNumbers = modifiedNumbers.replace(delimiter, ',');
-			modifiedNumbers = modifiedNumbers.substring(4);
+			String delimiter = "";
+			int index = 2;
+			while(numbers.charAt(index) != '\n')
+			{
+				delimiter += numbers.charAt(index);
+				index++;
+			}
+			index++;
+			modifiedNumbers = modifiedNumbers.substring(index);
+			modifiedNumbers = modifiedNumbers.replaceAll(delimiter, ",");
 		}
 
 		String[] splitNumbers = modifiedNumbers.split(",");
@@ -73,6 +80,8 @@ public class StringCalculator
 		System.out.println("Generating string s11: \"" + s11 + "\"");
 		String s12 = "//;\n100;80;60;50";
 		System.out.println("Generating string s12: \"" + s12 + "\"");
+		String s13 = "//delimiter\n10delimiter20delimiter30delimiter40";
+		System.out.println("Generating string s13: \"" + s13 + "\"");
 
 		System.out.println("Testing \"" + s1 + "\" == 0 " + (add(s1) == 0));
 		System.out.println("Testing \"" + s2 + "\" == 1 " + (add(s2) == 1));
@@ -107,5 +116,6 @@ public class StringCalculator
 		System.out.println("Testing \"" + s10 + "\" == 1111 " + (add(s10) == 1111));
 		System.out.println("Testing \"" + s11 + "\" == 6 " + (add(s11) == 6));
 		System.out.println("Testing \"" + s12 + "\" == 290 " + (add(s12) == 290));
-	}
+		System.out.println("Testing \"" + s13 + "\" == 100 " + (add(s13) == 100));
+	}		
 }
